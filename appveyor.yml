@@ -4,11 +4,6 @@ version: 1.0.0-{build}
 image: Ubuntu1804-minimal
 
 environment:
-  matrix:
-
-  - job_name: Job1
-
-  - job_name: Job2
 
 matrix:
   fast_finish: true

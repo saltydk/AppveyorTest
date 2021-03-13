@@ -27,7 +27,7 @@ for:
         - job_name: Job1
 
     build_script:
-    - sh: echo "${APPVEYOR_JOB_NAME}"
+    - sh: echo ${APPVEYOR_JOB_NAME}
 
   -
     matrix:
@@ -35,4 +35,4 @@ for:
         - job_name: Job2
 
     build_script:
-    - sh: echo "${APPVEYOR_JOB_NAME}"
+    - sh: echo ${APPVEYOR_JOB_NAME}

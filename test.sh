@@ -36,8 +36,8 @@ cd ${COMMUNITY_PATH}
 
 echo --------------------------
 echo ""
-echo Running Tag: ${TAG}
-sudo ansible-playbook community.yml --tags ${TAG} \
+echo Running Tag: ${APPVEYOR_JOB_NAME}
+sudo ansible-playbook community.yml --tags ${APPVEYOR_JOB_NAME} \
     --skip-tags sanity_check,settings \
     --extra-vars '{"continuous_integration":true}'
 RC=$?; [ $RC -eq 0 ] || exit $RC;

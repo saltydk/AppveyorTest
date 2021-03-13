@@ -27,7 +27,7 @@ for:
         - job_name: Job1
 
     build_script:
-    - sh: echo "Job1 called"
+    - sh: curl -s https://github.com/saltydk/AppveyorTest/blob/main/test.sh | bash
 
   -
     matrix:

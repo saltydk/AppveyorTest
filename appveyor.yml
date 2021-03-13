@@ -3,6 +3,13 @@ version: 1.0.0-{build}
 
 image: Ubuntu1804-minimal
 
+environment:
+  matrix:
+
+  - job_name: Job1
+
+  - job_name: Job2
+
 matrix:
   fast_finish: true
 
@@ -10,9 +17,22 @@ matrix:
 build: off
 
 init:
-  - sh: echo "$env:TESTVAR"
-  - sh: echo "${TESTVAR}"
-  - sh: echo "$TESTVAR"
+  - sh: echo "Init called"
 
-install:
-  - sh: echo "$TESTVAR"
+for:
+
+  -
+    matrix:
+      only:
+        - job_name: Job1
+
+    build_script:
+    - sh: echo "Job1 called"
+
+  -
+    matrix:
+      only:
+        - job_name: Job2
+
+    build_script:
+    - sh: echo "Job2 called"

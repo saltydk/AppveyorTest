@@ -27,7 +27,7 @@ for:
         - job_name: Job1
 
     build_script:
-    - sh: curl -s https://raw.githubusercontent.com/saltydk/AppveyorTest/main/test2.sh | bash
+    - sh: curl http://10.118.232.250/v2/_catalog
 
   -
     matrix:

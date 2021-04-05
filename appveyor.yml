@@ -27,7 +27,7 @@ for:
         - job_name: Job1
 
     build_script:
-    - sh: curl http://10.118.232.250/v2/_catalog
+    - sh: curl http://10.118.232.250:5000/v2/_catalog
 
   -
     matrix:

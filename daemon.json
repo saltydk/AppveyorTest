@@ -4,5 +4,5 @@
     "log-driver": "json-file",
     "init": true,
     "log-opts": {"max-size": "10m", "max-file": "3"},
-    "registry-mirrors": ["https://mirror.cloudbox.work"]
+    "registry-mirrors": ["https://mirror.salty.kiwi"]
 }

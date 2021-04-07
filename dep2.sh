@@ -35,7 +35,7 @@ readonly PYTHON_CMD_SUFFIX="-m pip install \
                               --upgrade"
 readonly PYTHON3_CMD="python3 $PYTHON_CMD_SUFFIX"
 readonly PYTHON2_CMD="python $PYTHON_CMD_SUFFIX"
-readonly PIP="9.0.3"
+readonly PIP="21.0.1"
 readonly ANSIBLE=">=2.9,<2.10"
 
 ################################

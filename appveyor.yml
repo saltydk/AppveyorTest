@@ -10,15 +10,15 @@ matrix:
 build: off
 
 init:
-  - sh: curl -s https://raw.githubusercontent.com/saltydk/AppveyorTest/main/dep5.sh | sudo -H bash
+  - sh: curl -s https://raw.githubusercontent.com/saltydk/AppveyorTest/main/dep4.sh | sudo -H bash
 
 install:
   - sh: ansible --version
-#  - sh: for i in defaults/*; do cp -n $i "$(basename "${i%.*}")"; done
-#  - sh: sudo ansible-playbook cloudbox.yml --syntax-check
-#  - sh: sudo ansible-playbook cloudbox.yml --tags core --skip-tags "settings" --extra-vars '{"continuous_integration":true}'
-#  - sh: sudo docker login -u $DOCKER_USER -p $DOCKER_PWD
-#  - sh: |
-#      sudo ansible-playbook cloudbox.yml --tags "cloudbox,emby,netdata,sabnzbd" \
-#          --skip-tags "settings" \
-#          --extra-vars '{"continuous_integration":true}'
+  - sh: for i in defaults/*; do cp -n $i "$(basename "${i%.*}")"; done
+  - sh: sudo ansible-playbook cloudbox.yml --syntax-check
+  - sh: sudo ansible-playbook cloudbox.yml --tags core --skip-tags "settings" --extra-vars '{"continuous_integration":true}'
+  - sh: sudo docker login -u $DOCKER_USER -p $DOCKER_PWD
+  - sh: |
+      sudo ansible-playbook cloudbox.yml --tags "cloudbox,emby,netdata,sabnzbd" \
+          --skip-tags "settings" \
+          --extra-vars '{"continuous_integration":true}'

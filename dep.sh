@@ -29,7 +29,6 @@ fi
 VERBOSE=true
 
 readonly SYSCTL_PATH="/etc/sysctl.conf"
-readonly APT_SOURCES_URL="https://raw.githubusercontent.com/cloudbox/cb/master/apt-sources"
 readonly PYTHON_CMD_SUFFIX="-m pip install \
                               --no-cache-dir \
                               --disable-pip-version-check \

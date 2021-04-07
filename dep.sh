@@ -75,19 +75,6 @@ if [ -f "$SYSCTL_PATH" ]; then
     fi
 fi
 
-## AppVeyor
-if [ "$SUDO_USER" = "appveyor" ]; then
-    rm /etc/apt/sources.list.d/*
-    rm /etc/apt/sources.list
-    if [[$(lsb_release -cs) == "bionic" ]]; then
-        APT_SOURCES_URL="$APT_SOURCES_URL/bionic.txt"
-    else
-        APT_SOURCES_URL="$APT_SOURCES_URL/xenial.txt"
-    fi
-    curl $APT_SOURCES_URL | tee /etc/apt/sources.list
-    apt-get update
-fi
-
 ## Environmental Variables
 export DEBIAN_FRONTEND=noninteractive
 

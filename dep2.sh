@@ -95,7 +95,7 @@ apt-get install -y --reinstall \
 
 ## Install pip3 Dependencies
 $PYTHON3_CMD \
-    pip==${PIP}
+    pip
 $PYTHON3_CMD \
     setuptools
 $PYTHON3_CMD \
@@ -107,7 +107,7 @@ $PYTHON3_CMD \
 
 ## Install pip2 Dependencies
 $PYTHON2_CMD \
-    pip==${PIP}
+    pip
 $PYTHON2_CMD \
     setuptools
 $PYTHON2_CMD \

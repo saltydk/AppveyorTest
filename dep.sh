@@ -56,22 +56,11 @@ $VERBOSE || exec &>/dev/null
 
 ## Disable IPv6
 if [ -f "$SYSCTL_PATH" ]; then
-    if [[ $(lsb_release -rs) < 18.04 ]]; then
-        ## Add 'Disable IPv6' entries into systctl
-        grep -q -F 'net.ipv6.conf.all.disable_ipv6 = 1' "$SYSCTL_PATH" || \
-            echo 'net.ipv6.conf.all.disable_ipv6 = 1' >> "$SYSCTL_PATH"
-        grep -q -F 'net.ipv6.conf.default.disable_ipv6 = 1' "$SYSCTL_PATH" || \
-            echo 'net.ipv6.conf.default.disable_ipv6 = 1' >> "$SYSCTL_PATH"
-        grep -q -F 'net.ipv6.conf.lo.disable_ipv6 = 1' "$SYSCTL_PATH" || \
-            echo 'net.ipv6.conf.lo.disable_ipv6 = 1' >> "$SYSCTL_PATH"
-        sysctl -p
-    else
-        ## Remove 'Disable IPv6' entries from systctl
-        sed -i -e '/^net.ipv6.conf.all.disable_ipv6/d' "$SYSCTL_PATH"
-        sed -i -e '/^net.ipv6.conf.default.disable_ipv6/d' "$SYSCTL_PATH"
-        sed -i -e '/^net.ipv6.conf.lo.disable_ipv6/d' "$SYSCTL_PATH"
-        sysctl -p
-    fi
+    ## Remove 'Disable IPv6' entries from systctl
+    sed -i -e '/^net.ipv6.conf.all.disable_ipv6/d' "$SYSCTL_PATH"
+    sed -i -e '/^net.ipv6.conf.default.disable_ipv6/d' "$SYSCTL_PATH"
+    sed -i -e '/^net.ipv6.conf.lo.disable_ipv6/d' "$SYSCTL_PATH"
+    sysctl -p
 fi
 
 ## Environmental Variables

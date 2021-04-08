@@ -15,3 +15,5 @@ init:
 install:
   - sh: ansible --version
   - sh: ls -la /srv/git/cloudbox
+  - sh: ls -la /home/appveyor
+  - sh: ls -la /home/seed

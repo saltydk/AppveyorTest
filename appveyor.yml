@@ -19,6 +19,7 @@ init:
 install:
   - sh: sudo python3 -m pip uninstall -y ansible ansible-base
   - sh: sudo python3 -m pip install ansible">=3.0.0,<4.0.0"
+  - sh: ansible --version
   - sh: ls -la /srv/git/cloudbox
   - sh: |
       echo ""

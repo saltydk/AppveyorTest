@@ -19,7 +19,6 @@ init:
 install:
   - sh: ansible --version
   - sh: ansible-galaxy collection list
-  - sh: sudo python -m pip uninstall -y ansible ansible-base
   - sh: sudo python3 -m pip uninstall -y ansible ansible-base
   - sh: sudo python3 -m pip install ansible">=3.3.0,<3.4.0"
   - sh: ansible-galaxy collection list

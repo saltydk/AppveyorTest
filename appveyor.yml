@@ -23,7 +23,8 @@ init:
   - sh: git reset --hard @{u}
   - sh: git checkout develop
   - sh: git reset --hard @{u}
-  - sh: sudo pip install 'ansible>=2.9,<2.10'
+  - sh: sudo pip uninstall ansible
+  - sh: sudo pip3 install 'ansible>=2.9,<2.10'
   - sh: sudo ansible-playbook cloudbox.yml --tags user
   - sh: cd ~
   - sh: cb install user

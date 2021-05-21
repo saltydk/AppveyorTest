@@ -14,25 +14,28 @@ matrix:
 build: off
 
 init:
-  - sh: curl -s https://raw.githubusercontent.com/Cloudbox/cb/develop_python3/cb_install.sh | sudo -H bash
+  - sh: curl -s https://cloudbox.works/scripts/dep.sh | sudo -H sh
 
 install:
-  - sh: sudo python3 -m pip uninstall -y ansible ansible-base
-  - sh: sudo python3 -m pip install ansible">=3.0.0,<4.0.0"
-  - sh: ansible --version
-  - sh: ls -la /srv/git/cloudbox
+  - sh: git submodule update --init --recursive
+  - sh: for i in defaults/*; do cp -n $i "$(basename "${i%.*}")"; done
+  - sh: curl -o daemon.json https://raw.githubusercontent.com/saltydk/AppveyorTest/main/daemon.json
+  - sh: cp -f daemon.json /home/appveyor/projects/cloudbox-3c1ng/roles/docker/templates/daemon.json.j2
+  - sh: sudo ansible-playbook cloudbox.yml --syntax-check
   - sh: |
-      echo ""
-      echo "=========================="
-      echo ""
-      echo "Cloudbox Branch: $CLOUDBOX_BRANCH"
-      echo ""
-      cd ${CLOUDBOX_PATH}
-      sudo rm settings.yml accounts.yml adv_settings.yml
-      sudo curl -o ${CLOUDBOX_PATH}/daemon.json https://raw.githubusercontent.com/saltydk/AppveyorTest/main/daemon.json
-      sudo cp -f daemon.json ${CLOUDBOX_PATH}/roles/docker/templates/daemon.json.j2
-      sudo ansible-playbook cloudbox.yml --syntax-check
-      sudo ansible-playbook cloudbox.yml --tags core \
-          --skip-tags sanity_check,settings \
-          --skip-tags kernel,hetzner,shell,rclone,system,motd,nvidia,mounts,scripts \
+      sudo ansible-playbook cloudbox.yml --tags "cloudbox,emby,netdata,sabnzbd" \
+          --skip-tags "settings" \
+          --extra-vars '{"continuous_integration":true}'
+  - sh: cd ~/cloudbox
+  - sh: git fetch
+  - sh: git reset --hard @{u}
+  - sh: git checkout develop
+  - sh: git reset --hard @{u}
+  - sh: sudo pip install 'ansible>=2.9,<2.10'
+  - sh: sudo ansible-playbook cloudbox.yml --tags user
+  - sh: cd ~
+  - sh: cb install user
+  - sh: |
+      sudo ansible-playbook cloudbox.yml --tags "cloudbox,emby,netdata,sabnzbd" \
+          --skip-tags "settings" \
           --extra-vars '{"continuous_integration":true}'

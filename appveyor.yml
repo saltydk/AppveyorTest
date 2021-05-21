@@ -3,10 +3,6 @@ version: 1.0.0-{build}
 
 image: Ubuntu1804-minimal
 
-environment:
-  CLOUDBOX_BRANCH: "develop_python3"
-  CLOUDBOX_PATH: "/srv/git/cloudbox"
-
 matrix:
   fast_finish: true
 

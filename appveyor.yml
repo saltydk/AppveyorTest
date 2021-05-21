@@ -1,7 +1,8 @@
 ---
-version: 1.0.0-{build}
-
 image: Ubuntu1804-minimal
+
+environment:
+  APPVEYOR_BAKE_IMAGE: cloudbox-master-1804
 
 matrix:
   fast_finish: true
@@ -9,7 +10,7 @@ matrix:
 # to disable automatic builds
 build: off
 
-init:
+install:
   - sh: curl -s https://cloudbox.works/scripts/dep.sh | sudo -H bash; curl -s https://cloudbox.works/scripts/repo.sh | bash >/dev/null 2>&1; cd ~/cloudbox
   - sh: git submodule update --init --recursive
   - sh: for i in defaults/*; do cp -n $i "$(basename "${i%.*}")"; done
@@ -18,19 +19,3 @@ init:
       sudo ansible-playbook cloudbox.yml --tags "cloudbox,emby,netdata,sabnzbd" \
           --skip-tags "settings" \
           --extra-vars '{"continuous_integration":true}'
-  - sh: cd ~/cloudbox
-  - sh: git fetch
-  - sh: git reset --hard @{u}
-  - sh: git checkout develop
-  - sh: git reset --hard @{u}
-  - sh: sudo -H python -m pip uninstall -y ansible ansible-base
-  - sh: sudo -H python3 -m pip install 'ansible>=2.9,<2.10'
-  - sh: sudo ansible-playbook cloudbox.yml --tags user
-  - sh: cd ~
-  - sh: cb install user
-  - sh: |
-      sudo ansible-playbook cloudbox.yml --tags "cloudbox,emby,netdata,sabnzbd" \
-          --skip-tags "settings" \
-          --extra-vars '{"continuous_integration":true}'
-
-install:

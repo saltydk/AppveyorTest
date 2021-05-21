@@ -1,5 +1,5 @@
 ---
-image: Ubuntu1804-minimal
+image: Ubuntu1804
 
 environment:
   APPVEYOR_BAKE_IMAGE: cloudbox-master-1804

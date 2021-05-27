@@ -11,6 +11,9 @@ install:
   - sh: curl -s https://cloudbox.works/scripts/dep.sh | sudo -H bash; curl -s https://cloudbox.works/scripts/repo.sh | bash >/dev/null 2>&1; cd ~/cloudbox
   - sh: git submodule update --init --recursive
   - sh: for i in defaults/*; do cp -n $i "$(basename "${i%.*}")"; done
+  - sh: sed -ri 's/^(\s*)(pass\s*:\s*password123\s*$)/\1pass: notsorandom/' accounts.yml
+  - sh: sed -ri 's/^(\s*)(domain\s*:\s*testcloudbox.ml\s*$)/\1domain: secret.com/' accounts.yml
+  - sh: cat accounts.yml
   - sh: sudo ansible-playbook cloudbox.yml --syntax-check
   - sh: |
       sudo ansible-playbook cloudbox.yml --tags "cloudbox,emby,netdata,sabnzbd" \
@@ -23,8 +26,8 @@ install:
   - sh: git reset --hard @{u}
   - sh: sudo -H python -m pip uninstall -y ansible ansible-base
   - sh: sudo -H python3 -m pip install 'ansible>=2.9,<2.10'
-  - sh: sudo ansible-playbook cloudbox.yml --tags user --extra-vars '{"continuous_integration":true}'
-  - sh: sudo ansible-playbook cloudbox.yml --tags user --extra-vars '{"continuous_integration":true}'
+  - sh: sudo ansible-playbook cloudbox.yml --tags settings
+  - sh: sudo ansible-playbook cloudbox.yml --tags user
   - sh: cd ~
   - sh: cb install user
   - sh: |

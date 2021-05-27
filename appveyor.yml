@@ -15,7 +15,7 @@ install:
   - sh: sudo ansible-playbook cloudbox.yml --syntax-check
   - sh: |
       sudo ansible-playbook cloudbox.yml --tags "cloudbox,emby,netdata,sabnzbd" \
-          --skip-tags "settings"
+          --skip-tags "settings,plex"
   - sh: git fetch
   - sh: git reset --hard @{u}
   - sh: git checkout develop
@@ -32,4 +32,4 @@ install:
           --skip-tags "settings"
   - sh: |
       sudo ansible-playbook cloudbox.yml --tags "cloudbox,emby,netdata,sabnzbd" \
-          --skip-tags "settings"
+          --skip-tags "settings,plex"

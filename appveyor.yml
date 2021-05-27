@@ -23,9 +23,9 @@ install:
   - sh: sudo -H python -m pip uninstall -y ansible ansible-base
   - sh: sudo -H python3 -m pip install 'ansible>=2.9,<2.10'
   - sh: sudo ansible-playbook cloudbox.yml --tags settings
-  - sh: sudo ansible-playbook cloudbox.yml --tags user
+  - sh: sudo ansible-playbook cloudbox.yml --tags user --extra-vars '{"continuous_integration":true}'
   - sh: cd ~
-  - sh: cb install user
+  - sh: cb install user -e continuous_integration=true
   - sh: |
       sudo ansible-playbook cloudbox.yml --tags "cloudbox,emby,netdata,sabnzbd" \
           --skip-tags "settings" \

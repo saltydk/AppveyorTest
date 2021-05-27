@@ -14,8 +14,7 @@ install:
   - sh: sudo ansible-playbook cloudbox.yml --syntax-check
   - sh: |
       sudo ansible-playbook cloudbox.yml --tags "cloudbox,emby,netdata,sabnzbd" \
-          --skip-tags "settings" \
-          --extra-vars '{"continuous_integration":true}'
+          --skip-tags "settings"
   - sh: git fetch
   - sh: git reset --hard @{u}
   - sh: git checkout develop
@@ -23,13 +22,13 @@ install:
   - sh: sudo -H python -m pip uninstall -y ansible ansible-base
   - sh: sudo -H python3 -m pip install 'ansible>=2.9,<2.10'
   - sh: sudo ansible-playbook cloudbox.yml --tags settings
-  - sh: sudo ansible-playbook cloudbox.yml --tags user --extra-vars '{"continuous_integration":true}'
+  - sh: |
+      sudo ansible-playbook cloudbox.yml --tags "user" \
+          --skip-tags "settings"
   - sh: cd /srv/git/cloudbox
   - sh: |
       sudo ansible-playbook cloudbox.yml --tags "user" \
-          --skip-tags "settings" \
-          --extra-vars '{"continuous_integration":true}'
+          --skip-tags "settings"
   - sh: |
       sudo ansible-playbook cloudbox.yml --tags "cloudbox,emby,netdata,sabnzbd" \
-          --skip-tags "settings" \
-          --extra-vars '{"continuous_integration":true}'
+          --skip-tags "settings"

@@ -2,7 +2,7 @@
 image: Ubuntu1804-minimal
 
 matrix:
-  fast_finish: true
+  fast_finish: false
 
 # to disable automatic builds
 build: off
@@ -26,10 +26,5 @@ install:
   - sh: |
       sudo ansible-playbook cloudbox.yml --tags "user" \
           --skip-tags "settings"
-  - sh: cd /srv/git/cloudbox
-  - sh: |
-      sudo ansible-playbook cloudbox.yml --tags "user" \
-          --skip-tags "settings"
-  - sh: |
-      sudo ansible-playbook cloudbox.yml --tags "core" \
-          --skip-tags "settings"
+  - sh: cb install user
+  - sh: cb install core

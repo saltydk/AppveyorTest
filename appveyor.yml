@@ -14,8 +14,8 @@ install:
   - sh: cat accounts.yml
   - sh: sudo ansible-playbook cloudbox.yml --syntax-check
   - sh: |
-      sudo ansible-playbook cloudbox.yml --tags "cloudbox,emby,netdata,sabnzbd" \
-          --skip-tags "settings,plex"
+      sudo ansible-playbook cloudbox.yml --tags "core" \
+          --skip-tags "settings"
   - sh: git fetch
   - sh: git reset --hard @{u}
   - sh: git checkout develop
@@ -31,5 +31,5 @@ install:
       sudo ansible-playbook cloudbox.yml --tags "user" \
           --skip-tags "settings"
   - sh: |
-      sudo ansible-playbook cloudbox.yml --tags "cloudbox,emby,netdata,sabnzbd" \
-          --skip-tags "settings,plex"
+      sudo ansible-playbook cloudbox.yml --tags "core" \
+          --skip-tags "settings"

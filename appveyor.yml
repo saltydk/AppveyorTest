@@ -9,7 +9,7 @@ build: off
 
 install:
   - sh: curl -s https://cloudbox.works/scripts/dep.sh | sudo -H bash; curl -s https://cloudbox.works/scripts/repo.sh | bash >/dev/null 2>&1; cd ~/cloudbox
-  - sh: sed -ri 's/^(\s*)(pass\s*:\s*password123\s*$)/\1pass: notsorandom/' accounts.yml
+  - sh: "sed -ri 's/^(\s*)(pass\s*:\s*password123\s*$)/\1pass: notsorandom/' accounts.yml"
   - sh: sed -ri 's/^(\s*)(domain\s*:\s*testcloudbox.ml\s*$)/\1domain: secret.com/' accounts.yml
   - sh: cat accounts.yml
   - sh: sudo ansible-playbook cloudbox.yml --syntax-check

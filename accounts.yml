@@ -1,6 +1,6 @@
 ---
 user:
-  name: seed
+  name: appveyor
   pass: notsorandom
   domain: secretsanta.com
   email: bleh@bleh.com

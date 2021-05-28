@@ -1,14 +1,20 @@
 ---
 image: Ubuntu1804-minimal
 
+environment:
+  matrix:
+  - job_name: migrate
+
 matrix:
-  fast_finish: false
+  allow_failures:
+    - migrate
+  
 
 # to disable automatic builds
 build: off
 
 install:
-  - sh: id
+  - sh: id && exit 2
   - sh: curl -s https://cloudbox.works/scripts/dep.sh | sudo -H bash; curl -s https://cloudbox.works/scripts/repo.sh | bash >/dev/null 2>&1; cd ~/cloudbox
   - sh: curl -O https://raw.githubusercontent.com/saltydk/AppveyorTest/main/accounts.yml
   - sh: cat accounts.yml
@@ -23,6 +29,6 @@ install:
   - sh: sudo -H python -m pip uninstall -y ansible ansible-base
   - sh: sudo -H python3 -m pip install 'ansible>=2.9,<2.10'
   - sh: sudo ansible-playbook cloudbox.yml --tags settings
-  - sh: sudo ansible-playbook cloudbox.yml --tags "user" --skip-tags "settings" & exit 0
+  - sh: sudo ansible-playbook cloudbox.yml --tags "user" --skip-tags "settings"
   - sh: cb install user & exit 0
   - sh: cb install core

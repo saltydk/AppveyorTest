@@ -1,6 +1,9 @@
 ---
 image: Ubuntu1804-minimal
 
+build: off
+test: off
+
 install:
   - sh: curl -s https://cloudbox.works/scripts/dep.sh | sudo -H bash; curl -s https://cloudbox.works/scripts/repo.sh | bash >/dev/null 2>&1; cd ~/cloudbox
   - sh: curl -O https://raw.githubusercontent.com/saltydk/AppveyorTest/main/accounts.yml

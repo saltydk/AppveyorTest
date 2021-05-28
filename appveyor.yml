@@ -2,8 +2,6 @@
 image: Ubuntu1804-minimal
 
 install:
-  - sh: id
-  - sh: cb wrong || true
   - sh: curl -s https://cloudbox.works/scripts/dep.sh | sudo -H bash; curl -s https://cloudbox.works/scripts/repo.sh | bash >/dev/null 2>&1; cd ~/cloudbox
   - sh: curl -O https://raw.githubusercontent.com/saltydk/AppveyorTest/main/accounts.yml
   - sh: cat accounts.yml
@@ -18,6 +16,6 @@ install:
   - sh: sudo -H python -m pip uninstall -y ansible ansible-base
   - sh: sudo -H python3 -m pip install 'ansible>=2.9,<2.10'
   - sh: sudo ansible-playbook cloudbox.yml --tags settings
-  - sh: sudo ansible-playbook cloudbox.yml --tags "user" --skip-tags "settings"
-  - sh: cb install user & exit 0
+  - sh: sudo ansible-playbook cloudbox.yml --tags "user" --skip-tags "settings" || true
+  - sh: cb install user || true
   - sh: cb install core

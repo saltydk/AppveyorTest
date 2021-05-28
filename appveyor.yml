@@ -1,24 +1,8 @@
 ---
 image: Ubuntu1804-minimal
 
-environment:
-  matrix:
-    - MIGRATE: ""
-      MIGRATE_VERSION: "1.0.0"
-      MIGRATE_ARCH: "64"
-
-matrix:
-  allow_failures:
-    - platform: x64
-      MIGRATE: ""
-      MIGRATE_VERSION: "1.0.0"
-  
-
-# to disable automatic builds
-build: off
-
 install:
-  - sh: id && exit 2
+  - sh: id && exit 2 || :
   - sh: curl -s https://cloudbox.works/scripts/dep.sh | sudo -H bash; curl -s https://cloudbox.works/scripts/repo.sh | bash >/dev/null 2>&1; cd ~/cloudbox
   - sh: curl -O https://raw.githubusercontent.com/saltydk/AppveyorTest/main/accounts.yml
   - sh: cat accounts.yml

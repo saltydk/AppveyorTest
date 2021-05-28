@@ -23,8 +23,6 @@ install:
   - sh: sudo -H python -m pip uninstall -y ansible ansible-base
   - sh: sudo -H python3 -m pip install 'ansible>=2.9,<2.10'
   - sh: sudo ansible-playbook cloudbox.yml --tags settings
-  - sh: |
-      sudo ansible-playbook cloudbox.yml --tags "user" \
-          --skip-tags "settings"
-  - sh: cb install user
+  - sh: sudo ansible-playbook cloudbox.yml --tags "user" --skip-tags "settings" & exit 0
+  - sh: cb install user & exit 0
   - sh: cb install core

@@ -9,10 +9,11 @@ skip_commits:
 image: Cloudbox1804
 
 matrix:
-  fast_finish: false
+  fast_finish: true
 
 # to disable automatic builds
 build: off
+test: off
 max_jobs: 10
 
 environment:
@@ -129,6 +130,8 @@ environment:
     
 install:
   - sh: ls -la /home/appveyor
+  - sh: ls -la /srv/git
+  - sh: ln -s /srv/git/cloudbox /home/appveyor/cloudbox
   - sh: |
       echo "=========================="
       echo ""

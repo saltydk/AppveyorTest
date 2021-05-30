@@ -20,3 +20,5 @@ install:
   - sh: sudo ansible-playbook cloudbox.yml --tags "user" --skip-tags "settings" || true
   - sh: cb install user || true
   - sh: cb install core
+  - sh: ls -la /home/appveyor
+  - sh: ls -la /srv/git

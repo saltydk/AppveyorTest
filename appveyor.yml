@@ -1,7 +1,6 @@
 ---
 image: 
   - Ubuntu1804
-  - Ubuntu2004
 
 build: off
 test: off

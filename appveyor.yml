@@ -12,4 +12,7 @@ install:
   - sh: sudo bash cb_install.sh -v
   - sh: cd /srv/git/cloudbox
   - sh: sudo ansible-playbook cloudbox.yml --syntax-check
-  - sh: sudo ansible-playbook cloudbox.yml --tags "cloudbox,emby,netdata,sabnzbd" --skip-tags "settings" --extra-vars '{"continuous_integration":true}'
+  - sh: |
+      sudo ansible-playbook cloudbox.yml --tags "cloudbox,emby,netdata,sabnzbd" \
+          --skip-tags "settings" \
+          --extra-vars '{"continuous_integration":true}'

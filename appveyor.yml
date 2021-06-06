@@ -8,7 +8,7 @@ test: off
 
 install:
   - sh: lsb_release -a
-  - sh: curl -s https://raw.githubusercontent.com/Cloudbox/cb/develop_python3/cb_install.sh | sudo -H bash | cd /srv/git/cloudbox
+  - sh: curl -s https://raw.githubusercontent.com/Cloudbox/cb/develop_python3/cb_install.sh | sudo -H bash -v | cd /srv/git/cloudbox
   - sh: sudo ansible-playbook cloudbox.yml --syntax-check
   - sh: sudo ansible-playbook cloudbox.yml --tags "cloudbox,emby,netdata,sabnzbd" \
           --skip-tags "settings" \

@@ -7,4 +7,4 @@ build: off
 test: off
 
 install:
-  - sh: docker ps
+  - sh: sleep 140 && docker ps

@@ -29,7 +29,7 @@ for:
       only:
         - job_group: test
       
-    install:
-      - sh: uname -a
+install:
+  - sh: uname -a
 
 

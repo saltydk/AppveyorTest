@@ -23,12 +23,12 @@ environment:
 for:
 
   -
+    only_commits:
+      message: /${APPVEYOR_JOB_NAME}/
     matrix:
       only:
         - job_group: test
-      only_commits:
-        message: /${APPVEYOR_JOB_NAME}/
- 
+      
     install:
   - sh: uname -a
 

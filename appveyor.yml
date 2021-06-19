@@ -14,14 +14,25 @@ environment:
   matrix:
 
   - job_name: airdcpp
+  - job_group: test
+  - job_name: airsonic
+  - job_group: test
+  - job_name: alltube
+  - job_group: test
+
     only_commits:
       message: /airdcpp/
-  - job_name: airsonic
-    only_commits:
-      message: /airsonic/
-  - job_name: alltube
-    only_commits:
-      message: /alltube/
 
-install:
+for:
+
+  -
+    matrix:
+      only:
+        - job_group: test
+      only_commits:
+        message: /${APPVEYOR_JOB_NAME}/
+ 
+    install:
   - sh: uname -a
+
+

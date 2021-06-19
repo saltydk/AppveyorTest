@@ -30,6 +30,6 @@ for:
         - job_group: test
       
     install:
-  - sh: uname -a
+      - sh: uname -a
 
 

@@ -27,6 +27,6 @@ for:
       message: /${APPVEYOR_JOB_NAME}/
       
 install:
-  - sh: uname -a
+  - sh: ls
 
 

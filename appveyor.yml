@@ -25,9 +25,6 @@ for:
   -
     only_commits:
       message: /${APPVEYOR_JOB_NAME}/
-    matrix:
-      only:
-        - job_group: test
       
 install:
   - sh: uname -a

@@ -14,11 +14,11 @@ environment:
   matrix:
 
   - job_name: airdcpp
-  - job_group: test
+    job_group: test
   - job_name: airsonic
-  - job_group: test
+    job_group: test
   - job_name: alltube
-  - job_group: test
+    job_group: test
 
 for:
 

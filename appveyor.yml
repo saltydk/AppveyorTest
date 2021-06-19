@@ -20,9 +20,6 @@ environment:
   - job_name: alltube
   - job_group: test
 
-    only_commits:
-      message: /airdcpp/
-
 for:
 
   -

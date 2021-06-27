@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Install Dependencies
-        run: curl https://raw.githubusercontent.com/saltyorg/sb/master/sb_install.sh --output sb_install.sh && sudo bash sb_install.sh -v
+        run: curl https://raw.githubusercontent.com/saltyorg/sb/master/sb_dep.sh --output sb_dep.sh && sudo bash sb_dep.sh -v
         
       - name: Create /srv/git
         run: sudo mkdir /srv/git

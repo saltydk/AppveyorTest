@@ -28,3 +28,6 @@ jobs:
 
       - name: Run a one-line script
         run: ls -la /srv/git
+
+      - name: Run a one-line script
+        run: ls -la /srv/git/saltbox

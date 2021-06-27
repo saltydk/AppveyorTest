@@ -20,19 +20,13 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Install Dependencies
-        run: curl https://raw.githubusercontent.com/saltyorg/sb/master/sb_dep.sh --output sb_dep.sh && sudo bash sb_dep.sh -v
+        run: curl https://raw.githubusercontent.com/saltyorg/sb/master/sb_install.sh --output sb_install.sh && sudo bash sb_install.sh -v
         
-      - name: Create /srv/git
-        run: sudo mkdir /srv/git
-
-      - name: Symlink cloned repository to /srv/git/saltbox
-        run: sudo ln -s $GITHUB_WORKSPACE /srv/git/saltbox
-
       - name: Chown /srv/git
         run: sudo chown -R runner:runner /srv/git
 
       - name: Download accounts.yml
-        run: curl -o accounts.yml https://raw.githubusercontent.com/saltydk/AppveyorTest/main/github.yml
+        run: cd /srv/git/saltbox && rm -rf accounts.yml && curl -o accounts.yml https://raw.githubusercontent.com/saltydk/AppveyorTest/main/github.yml
 
       - name: Syntax Check
         run: sudo ansible-playbook saltbox.yml --syntax-check

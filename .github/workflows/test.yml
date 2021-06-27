@@ -28,6 +28,9 @@ jobs:
       - name: Download accounts.yml
         run: cd /srv/git/saltbox && rm -rf accounts.yml && curl -o accounts.yml https://raw.githubusercontent.com/saltydk/AppveyorTest/main/github.yml
 
+      - name: DEBUG
+        run: pwd && ls -la
+
       - name: Syntax Check
         run: sudo ansible-playbook saltbox.yml --syntax-check
 

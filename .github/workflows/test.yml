@@ -36,6 +36,10 @@ jobs:
 
       - name: Syntax Check
         run: cd /srv/git/saltbox && sudo ansible-playbook saltbox.yml --syntax-check
+        env:
+          TERM: 'xterm-color'
 
       - name: Install Saltbox
         run: cd /srv/git/saltbox && sudo ansible-playbook saltbox.yml --tags "user" --skip-tags "settings,plex-extra-tasks" --extra-vars '{"continuous_integration":true}'
+        env:
+          TERM: 'xterm-color'

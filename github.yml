@@ -1,0 +1,17 @@
+---
+user:
+  name: runner
+  pass: runner
+  domain: secretsanta.com
+  email: bleh@bleh.com
+cloudflare:
+  email:
+  api:
+plex:
+  user:
+  pass:
+pushover:
+  app_token:
+  user_key:
+  priority:
+apprise:

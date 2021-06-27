@@ -28,5 +28,14 @@ jobs:
       - name: Symlink cloned repository to /srv/git/saltbox
         run: sudo ln -s $GITHUB_WORKSPACE /srv/git/saltbox
 
-      - name: Whoami
-        run: whoami
+      - name: Chown /srv/git
+        run: sudo chown -R appveyor:appveyor /srv/git
+
+      - name: Download accounts.yml
+        run: curl -o accounts.yml https://raw.githubusercontent.com/saltydk/AppveyorTest/main/github.yml
+
+      - name: Syntax Check
+        run: sudo ansible-playbook saltbox.yml --syntax-check
+
+      - name: Install Saltbox
+        run: sudo ansible-playbook saltbox.yml --tags "saltbox,emby,netdata,sabnzbd" --skip-tags "settings,plex-extra-tasks" --extra-vars '{"continuous_integration":true}'

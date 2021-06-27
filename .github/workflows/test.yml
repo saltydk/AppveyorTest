@@ -29,10 +29,10 @@ jobs:
         run: cd /srv/git/saltbox && rm -rf accounts.yml && curl -o accounts.yml https://raw.githubusercontent.com/saltydk/AppveyorTest/main/github.yml
 
       - name: DEBUG
-        run: pwd && ls -la
+        run: cd /srv/git/saltbox && pwd && ls -la
 
       - name: Syntax Check
-        run: sudo ansible-playbook saltbox.yml --syntax-check
+        run: cd /srv/git/saltbox && sudo ansible-playbook saltbox.yml --syntax-check
 
       - name: Install Saltbox
-        run: sudo ansible-playbook saltbox.yml --tags "saltbox,emby,netdata,sabnzbd" --skip-tags "settings,plex-extra-tasks" --extra-vars '{"continuous_integration":true}'
+        run: cd /srv/git/saltbox && sudo ansible-playbook saltbox.yml --tags "saltbox,emby,netdata,sabnzbd" --skip-tags "settings,plex-extra-tasks" --extra-vars '{"continuous_integration":true}'

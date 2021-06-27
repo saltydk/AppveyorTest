@@ -39,3 +39,6 @@ jobs:
 
       - name: Install Saltbox
         run: export TERM=xterm-color && cd /srv/git/saltbox && sudo ansible-playbook saltbox.yml --tags "user" --skip-tags "settings,plex-extra-tasks" --extra-vars '{"continuous_integration":true}'
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'

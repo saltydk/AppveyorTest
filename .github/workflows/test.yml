@@ -29,7 +29,7 @@ jobs:
         run: sudo ln -s $GITHUB_WORKSPACE /srv/git/saltbox
 
       - name: Chown /srv/git
-        run: sudo chown -R appveyor:appveyor /srv/git
+        run: sudo chown -R runner:runner /srv/git
 
       - name: Download accounts.yml
         run: curl -o accounts.yml https://raw.githubusercontent.com/saltydk/AppveyorTest/main/github.yml

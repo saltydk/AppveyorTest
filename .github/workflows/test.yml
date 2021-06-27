@@ -23,3 +23,5 @@ jobs:
       - name: Run a one-line script
         run: pwd
 
+      - name: Run a one-line script
+        run: echo $GITHUB_WORKSPACE

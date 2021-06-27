@@ -36,7 +36,7 @@ jobs:
         run: cd /srv/git/saltbox && sudo ansible-playbook saltbox.yml --syntax-check
 
       - name: Install Saltbox
-        run: cd /srv/git/saltbox && sudo ansible-playbook saltbox.yml --tags "user" --skip-tags "settings,plex-extra-tasks" --extra-vars '{"continuous_integration":true}'
+        run: cd /srv/git/saltbox && script -e -c sudo ansible-playbook saltbox.yml --tags "user" --skip-tags "settings,plex-extra-tasks" --extra-vars '{"continuous_integration":true}'
         env:
           FORCE_COLOR: '1'
           PY_COLORS: '1'

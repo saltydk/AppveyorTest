@@ -38,4 +38,4 @@ jobs:
         run: cd /srv/git/saltbox && sudo ansible-playbook saltbox.yml --syntax-check
 
       - name: Install Saltbox
-        run: cd /srv/git/saltbox && sudo ansible-playbook saltbox.yml --tags "saltbox,emby,netdata,sabnzbd" --skip-tags "settings,plex-extra-tasks" --extra-vars '{"continuous_integration":true}'
+        run: cd /srv/git/saltbox && sudo ansible-playbook saltbox.yml --tags "docker" --skip-tags "settings,plex-extra-tasks" --extra-vars '{"continuous_integration":true}'

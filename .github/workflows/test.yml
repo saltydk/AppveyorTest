@@ -4,7 +4,7 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   # This workflow contains a single job called "build"
-  install:
+  ${{ matrix.roles }}:
     # The type of runner that the job will run on
     runs-on: ubuntu-20.04
 

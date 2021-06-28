@@ -11,6 +11,7 @@ jobs:
     strategy:
       matrix:
         roles: [airdcpp, airsonic, alltube, alternatrr, alternatrrx, apprise, asshama, autoscan, deluge, grafana, influxdb, lidarrx, ombi, ombix, prowlarr, qbittorrent, radarrx, sonarrx, speedtest, transfer, transmission]
+      fail-fast: false
     steps:
       - name: Install Dependencies
         run: curl https://raw.githubusercontent.com/saltyorg/sb/master/sb_install.sh --output sb_install.sh && sudo bash sb_install.sh -v

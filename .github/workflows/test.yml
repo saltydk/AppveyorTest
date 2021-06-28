@@ -14,30 +14,9 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Run ENV
-        run: env
+      - name: Fail
+        run: exit(1)
 
-      - name: Run sudo ENV
-        run: sudo env
-
-      - name: Install Dependencies
-        run: curl https://raw.githubusercontent.com/saltyorg/sb/master/sb_install.sh --output sb_install.sh && sudo bash sb_install.sh -v
-        
-      - name: Chown /srv/git
-        run: sudo chown -R runner:runner /srv/git
-
-      - name: Download accounts.yml
-        run: cd /srv/git/saltbox && rm -rf accounts.yml && curl -o accounts.yml https://raw.githubusercontent.com/saltydk/AppveyorTest/main/github.yml
-
-      - name: DEBUG
-        run: cd /srv/git/saltbox && pwd && ls -la
-
-      - name: Syntax Check
-        run: cd /srv/git/saltbox && sudo ansible-playbook saltbox.yml --syntax-check
-
-      - name: Install Saltbox
-        run: export ANSIBLE_FORCE_COLOR=true && cd /srv/git/saltbox && sudo ansible-playbook saltbox.yml --tags "user" --skip-tags "settings,plex-extra-tasks" --extra-vars '{"continuous_integration":true}'
-        env:
-          FORCE_COLOR: '1'
-          PY_COLORS: '1'
-          ANSIBLE_FORCE_COLOR: '1'
+      - name: Run anyway
+        run: uname -a
+        if: ${{ always() }}

@@ -1,22 +1,41 @@
-# This is a basic workflow to help you get started with Actions
+name: Install
 
-name: CI
-
-# Controls when the workflow will run
 on: [push, pull_request, workflow_dispatch]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  install:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    strategy:
+      matrix:
+        roles: [airdcpp, airsonic, alltube]
     steps:
-      - name: Fail
-        run: exit(1)
+      - name: Install Dependencies
+        run: curl https://raw.githubusercontent.com/saltyorg/sb/master/sb_install.sh --output sb_install.sh && sudo bash sb_install.sh -v
 
-      - name: Run anyway
-        run: uname -a
+      - name: Chown /srv/git
+        run: sudo chown -R runner:runner /srv/git
+
+      - name: Remove accounts.yml
+        run: cd /srv/git/saltbox && rm -rf accounts.yml
+
+      - name: Download Github Actions accounts.yml
+        run: cd /srv/git/saltbox && curl -o accounts.yml https://raw.githubusercontent.com/saltydk/AppveyorTest/main/github.yml
+
+      - name: Create, chown and chmod /tmp/ansible
+        run: sudo mkdir /tmp/ansible && sudo chown -R runner:runner /tmp/ansible && chmod 0777 /tmp/ansible
+
+      - name: Syntax Check
+        run: cd /srv/git/saltbox && sudo ansible-playbook saltbox.yml --syntax-check
+
+      - name: Install Saltbox
+        run: cd /srv/git/saltbox && sudo ansible-playbook saltbox.yml --tags "core,community" --skip-tags "sanity_check,settings,kernel,hetzner,shell,rclone,system,motd,nvidia,mounts,scripts" --extra-vars '{"continuous_integration":true}'
+
+      - name: Copy default configuration
+        run: cd /opt/community && cp -n defaults/ansible.cfg.default ansible.cfg && cp -n defaults/settings.yml.default settings.yml
+
+      - name: Install ${{ matrix.roles }}
+        run: cd /opt/community && sudo ansible-playbook community.yml --tags "${{ matrix.roles }}" --skip-tags "sanity_check,settings" --extra-vars '{"continuous_integration":true}'
         if: ${{ always() }}

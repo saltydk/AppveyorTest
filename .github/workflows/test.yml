@@ -3,9 +3,9 @@ name: install
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
-  # This workflow contains a single job called "build"
   job:
-    # The type of runner that the job will run on
+    name: '${{ matrix.roles }}'
+
     runs-on: ubuntu-20.04
     strategy:
       matrix:
@@ -31,6 +31,7 @@ jobs:
           - transfer 
           - transmission
       fail-fast: false
+
     steps:
       - name: Install Dependencies
         run: curl https://raw.githubusercontent.com/saltyorg/sb/master/sb_install.sh --output sb_install.sh && sudo bash sb_install.sh -v

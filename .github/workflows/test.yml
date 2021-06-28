@@ -1,4 +1,4 @@
-name: setup
+name: install
 
 on: [push, pull_request, workflow_dispatch]
 
@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        roles: [airdcpp, airsonic, alltube]
+        roles: [airdcpp, airsonic, alltube, alternatrr, alternatrrx, apprise, asshama, autoscan, deluge, grafana, influxdb, lidarrx, ombi, ombix, prowlarr, qbittorrent, radarrx, sonarrx, speedtest, transfer, transmission]
     steps:
       - name: Install Dependencies
         run: curl https://raw.githubusercontent.com/saltyorg/sb/master/sb_install.sh --output sb_install.sh && sudo bash sb_install.sh -v
@@ -38,4 +38,3 @@ jobs:
 
       - name: Install ${{ matrix.roles }}
         run: cd /opt/community && sudo ansible-playbook community.yml --tags "${{ matrix.roles }}" --skip-tags "sanity_check,settings" --extra-vars '{"continuous_integration":true}'
-        if: ${{ always() }}

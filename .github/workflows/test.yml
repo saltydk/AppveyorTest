@@ -10,7 +10,27 @@ jobs:
 
     strategy:
       matrix:
-        roles: [airdcpp, airsonic, alltube, alternatrr, alternatrrx, apprise, asshama, autoscan, deluge, grafana, influxdb, lidarrx, ombi, ombix, prowlarr, qbittorrent, radarrx, sonarrx, speedtest, transfer, transmission]
+        roles: 
+          - airdcpp 
+          - airsonic 
+          - alltube 
+          - alternatrr 
+          - alternatrrx 
+          - asshama 
+          - autoscan 
+          - deluge 
+          - grafana 
+          - influxdb 
+          - lidarrx 
+          - ombi 
+          - ombix 
+          - prowlarr 
+          - qbittorrent 
+          - radarrx 
+          - sonarrx 
+          - speedtest 
+          - transfer 
+          - transmission
       fail-fast: false
     steps:
       - name: Install Dependencies

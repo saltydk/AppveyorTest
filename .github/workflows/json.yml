@@ -6,8 +6,15 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-    - id: set-matrix
-      run: echo "::set-output name=matrix::{\"roles\":[\"test\",\"test2\",\"test3\"]}"
+      - name: Read package.json
+        id: package
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./community.yml
+      - name: Echo community.yml
+        run: echo "${{ steps.package.outputs.content }
+      - id: set-matrix
+        run: echo "::set-output name=matrix::{\"roles\":[\"test\",\"test2\",\"test3\"]}"
   job2:
     name: '${{ matrix.roles }}'
     needs: job1

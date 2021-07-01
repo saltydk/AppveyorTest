@@ -7,7 +7,7 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
     - id: set-matrix
-      run: echo "::set-output name=matrix::{\"roles\":[{\"test\",\"test2\",\"test3\"]}"
+      run: echo "::set-output name=matrix::{\"roles\":[\"test\",\"test2\",\"test3\"]}"
   job2:
     name: '${{ matrix.roles }}'
     needs: job1

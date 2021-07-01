@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - id: set-matrix
-        run: echo "::set-output name=matrix::{\"roles\":[$(awk -F'[][]' -e '/ role:/ && FNR > 13' community.yml | awk -F'[][]' '{print $2}' | tr '\n' ',' | sed 's/,*$//' | sed "s/.\(airsonic\|alltube\).,//g")]}"
+        run: awk -F'[][]' -e '/ role:/ && FNR > 13' community.yml | awk -F'[][]' '{print $2}' | tr '\n' ',' | sed 's/,*$//' | sed "s/.\(airsonic\|alltube\).,//g" >> tmp.file && export OUTPUT=`cat tmp.file` && echo "::set-output name=matrix::{\"roles\":[$OUTPUT]}"
   job2:
     name: '${{ matrix.roles }}'
     needs: job1

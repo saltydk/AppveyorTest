@@ -14,7 +14,7 @@ jobs:
           path: community.yml
       - name: Echo community.yml
         run: |
-          echo ${{ steps.community.outputs.content }} | awk -F'[][]' -e '/ role:/ && FNR > 13' | awk -F'[][]' '{print $2}' | tr '\n' ',' | sed 's/,*$//' | sed "s/.\(airsonic\|alltube\).,//g
+          echo "${{ steps.community.outputs.content }}" | awk -F'[][]' -e '/ role:/ && FNR > 13' | awk -F'[][]' '{print $2}' | tr '\n' ',' | sed 's/,*$//' | sed "s/.\(airsonic\|alltube\).,//g
         id: validroles
         env:
           CONTENT: ${{ steps.community.outputs.content }}

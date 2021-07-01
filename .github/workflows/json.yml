@@ -10,7 +10,7 @@ jobs:
         id: package
         uses: juliangruber/read-file-action@v1
         with:
-          path: ./community.yml
+          path: community.yml
       - name: Echo community.yml
         run: echo "${{ steps.package.outputs.content }}"
       - id: set-matrix

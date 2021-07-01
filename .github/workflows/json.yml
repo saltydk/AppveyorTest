@@ -7,17 +7,10 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - uses: actions/checkout@v2
-      - name: Read community.json
-        id: community
-        uses: juliangruber/read-file-action@v1
-        with:
-          path: community.yml
-      - name: Echo community.yml
+      - name: Parse community.yml
         run: |
-          echo "${{ steps.community.outputs.content }}" | awk -F'[][]' -e '/ role:/ && FNR > 13' | awk -F'[][]' '{print $2}' | tr '\n' ',' | sed 's/,*$//' | sed "s/.\(airsonic\|alltube\).,//g
+          awk -F'[][]' -e '/ role:/ && FNR > 13' community.yml | awk -F'[][]' '{print $2}' | tr '\n' ',' | sed 's/,*$//' | sed "s/.\(airsonic\|alltube\).,//g
         id: validroles
-        env:
-          CONTENT: ${{ steps.community.outputs.content }}
       - id: set-matrix
         run: echo "${{ steps.validroles.outputs.content }}"
   job2:

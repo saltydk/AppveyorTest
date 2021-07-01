@@ -13,7 +13,7 @@ jobs:
         with:
           path: community.yml
       - name: Echo community.yml
-        run: echo "${{ steps.package.outputs.content }}"
+        run: echo "${{ steps.package.outputs.content }}" | awk -F'[][]' -e '/ role:/ && FNR > 13' | awk -F'[][]' '{print $2}' | tr '\n' ',' | sed 's/,*$//' | sed "s/.\(airsonic\|alltube\).,//g"
       - id: set-matrix
         run: echo "::set-output name=matrix::{\"roles\":[\"test\",\"test2\",\"test3\"]}"
   job2:

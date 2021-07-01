@@ -13,7 +13,9 @@ jobs:
         with:
           path: community.yml
       - name: Echo community.yml
-        run: echo "::set-output name=content::$(${{ steps.community.outputs.content }}" | awk -F'[][]' -e '/ role:/ && FNR > 13' | awk -F'[][]' '{print $2}' | tr '\n' ',' | sed 's/,*$//' | sed "s/.\(airsonic\|alltube\).,//g)\n"
+        run: |
+          export CONTENT="$(${{ steps.community.outputs.content }}" | awk -F'[][]' -e '/ role:/ && FNR > 13' | awk -F'[][]' '{print $2}' | tr '\n' ',' | sed 's/,*$//' | sed "s/.\(airsonic\|alltube\).,//g)"
+          echo "::set-output name=content::$($CONTENT)\n"
         id: validroles
       - id: set-matrix
         run: echo "${{ steps.validroles.outputs.content }}"

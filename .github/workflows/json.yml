@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Parse community.yml
         run: |
-          awk -F'[][]' -e '/ role:/ && FNR > 13' community.yml | awk -F'[][]' '{print $2}' | tr '\n' ',' | sed 's/,*$//' | sed "s/.\(airsonic\|alltube\).,//g
+          awk -F'[][]' -e '/ role:/ && FNR > 13' community.yml | awk -F'[][]' '{print $2}' | tr '\n' ',' | sed 's/,*$//' | sed "s/.\(airsonic\|alltube\).,//g"
         id: validroles
       - id: set-matrix
         run: echo "${{ steps.validroles.outputs.content }}"

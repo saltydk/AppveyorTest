@@ -15,7 +15,7 @@ jobs:
       - name: Echo community.yml
         run: echo "${{ steps.package.outputs.content }}" | awk -F'[][]' -e '/ role:/ && FNR > 13' | awk -F'[][]' '{print $2}' | tr '\n' ',' | sed 's/,*$//' | sed "s/.\(airsonic\|alltube\).,//g"
       - id: set-matrix
-        run: echo "::set-output name=matrix::{\"roles\":[${{ ${{ steps.package.outputs.content }}" | awk -F'[][]' -e '/ role:/ && FNR > 13' | awk -F'[][]' '{print $2}' | tr '\n' ',' | sed 's/,*$//' | sed "s/.\(airsonic\|alltube\).,//g }}]}"
+        run: echo "::set-output name=matrix::{\"roles\":[${{ steps.set-matrix.outputs.matrix | awk -F'[][]' -e '/ role:/ && FNR > 13' | awk -F'[][]' '{print $2}' | tr '\n' ',' | sed 's/,*$//' | sed "s/.\(airsonic\|alltube\).,//g }}]}"
   job2:
     name: '${{ matrix.roles }}'
     needs: job1
